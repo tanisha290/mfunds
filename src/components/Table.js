@@ -26,10 +26,19 @@ function Table({ searchTerm }) {
     }, []);// Empty dependency array ensures this runs only once
 
     // Filter data based on the search term
-    const filteredData = data.filter((item) =>
-        item.Scheme_name && item.Scheme_name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
+    // const filteredData = data.filter((item) =>
+    //     item.Scheme_name && item.Scheme_name.toLowerCase().includes(searchTerm.toLowerCase())
+    // );
+    const filteredData = searchTerm
+    ? data.filter((item) =>
+          item.Scheme_name && item.Scheme_name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : data; // If searchTerm is empty, show all data
+    // console.log("Fetched Data:", data);
+    // console.log("Filtered Data:", filteredData); // Debugging
+    // console.log("Search Term:", searchTerm);
+    if (filteredData.length === 0) return <p>No matching records found</p>;
+    
     // Show loading or error messages
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
