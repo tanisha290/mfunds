@@ -1,0 +1,54 @@
+/* filepath: src/pages/Calculate.css */
+.calculate-page {
+    padding: 20px;
+    text-align: center;
+}
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.filter-row {
+    display: flex;
+    justify-content: center;
+    gap: 250px;
+    width: 100%;
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filter label {
+    margin-bottom: 5px;
+}
+
+.filter input[type="range"] {
+    width: 150px;
+}
+
+.filter select {
+    padding: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f4f4f4;
+}
