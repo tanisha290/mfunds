@@ -40,7 +40,7 @@
 //             <div className="compare-boxes">
 //                 {selectedFunds.map((fund, index) => (
 //                     <div key={index} className="compare-box" onClick={() => openModal(index)}>
-//                         {fund ? <h2>{fund.Scheme_name}</h2> : <div className="plus-sign">+</div>}
+//                         {fund ? <h2>{fund.scheme_name}</h2> : <div className="plus-sign">+</div>}
 //                     </div>
 //                 ))}
 //             </div>
@@ -53,11 +53,11 @@
 //                     <ResponsiveContainer width="100%" height={400}>
 //                         <BarChart data={filteredFunds}>
 //                             <CartesianGrid strokeDasharray="3 3" />
-//                             <XAxis dataKey="Scheme_name" />
+//                             <XAxis dataKey="scheme_name" />
 //                             <YAxis />
 //                             <Tooltip />
 //                             <Legend />
-//                             <Bar dataKey="returns_1yr" fill="#8884d8" />
+//                             <Bar dataKey="return_1yr" fill="#8884d8" />
 //                         </BarChart>
 //                     </ResponsiveContainer>
 //                 </div>
@@ -128,7 +128,7 @@ function Compare() {
                     >
                         {fund ? (
                             <div>
-                                <h2>{fund.Scheme_name}</h2>
+                                <h2>{fund.scheme_name}</h2>
                             </div>
                         ) : (
                             <div className="plus-sign">+</div>
@@ -152,40 +152,40 @@ function Compare() {
                     <ResponsiveContainer width="100%" height={400}>
                         <BarChart data={filteredFunds}>
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="Scheme_name" />
+                            <XAxis dataKey="scheme_name" />
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey="returns_1yr" fill="#8884d8" />
+                            <Bar dataKey="return_1yr" fill="#8884d8" />
                         </BarChart>
                     </ResponsiveContainer>
                     <h2>Returns 3 Years</h2>
                     <ResponsiveContainer width="100%" height={400}>
                         <BarChart data={filteredFunds}>
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="Scheme_name" />
+                            <XAxis dataKey="scheme_name" />
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey="returns_3yr" fill="#82ca9d" />
+                            <Bar dataKey="return_3yr" fill="#82ca9d" />
                         </BarChart>
                     </ResponsiveContainer>
                     <h2>Returns 5 Years</h2>
                     <ResponsiveContainer width="100%" height={400}>
                         <BarChart data={filteredFunds}>
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="Scheme_name" />
+                            <XAxis dataKey="scheme_name" />
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey="returns_5yr" fill="#ffc658" />
+                            <Bar dataKey="return_5yr" fill="#ffc658" />
                         </BarChart>
                     </ResponsiveContainer>
                     <h2>Minimum SIP</h2>
                     <ResponsiveContainer width="100%" height={400}>
                         <BarChart data={filteredFunds}>
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="Scheme_name" />
+                            <XAxis dataKey="scheme_name" />
                             <YAxis />
                             <Tooltip />
                             <Legend />
@@ -196,7 +196,7 @@ function Compare() {
                     <ResponsiveContainer width="100%" height={400}>
                         <BarChart data={filteredFunds}>
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="Scheme_name" />
+                            <XAxis dataKey="scheme_name" />
                             <YAxis />
                             <Tooltip />
                             <Legend />
@@ -207,11 +207,11 @@ function Compare() {
                     <ResponsiveContainer width="100%" height={400}>
                         <BarChart data={filteredFunds}>
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="Scheme_name" />
+                            <XAxis dataKey="scheme_name" />
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey="fund_size_cr" fill="#ffc658" />
+                            <Bar dataKey="fund_size" fill="#ffc658" />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>

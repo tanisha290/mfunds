@@ -21,24 +21,17 @@ function Table({ searchTerm }) {
                 setLoading(false); // Set loading to false
             }
         };
-    
+
         fetchData();
-    }, []);// Empty dependency array ensures this runs only once
+    }, []); // Empty dependency array ensures this runs only once
 
     // Filter data based on the search term
-    // const filteredData = data.filter((item) =>
-    //     item.Scheme_name && item.Scheme_name.toLowerCase().includes(searchTerm.toLowerCase())
-    // );
     const filteredData = searchTerm
-    ? data.filter((item) =>
-          item.Scheme_name && item.Scheme_name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : data; // If searchTerm is empty, show all data
-    // console.log("Fetched Data:", data);
-    // console.log("Filtered Data:", filteredData); // Debugging
-    // console.log("Search Term:", searchTerm);
-    if (filteredData.length === 0) return <p>No matching records found</p>;
-    
+        ? data.filter((item) =>
+              item.scheme_name && item.scheme_name.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        : data; // If searchTerm is empty, show all data
+
     // Show loading or error messages
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
@@ -65,18 +58,18 @@ function Table({ searchTerm }) {
                     <tr key={index}>
                         <td><input type="checkbox" /></td>
                         <td>
-                            <Link to={`/fund/${encodeURIComponent(item.Scheme_name || "Unknown")}`}>
-                                {item.Scheme_name || "Unknown"}
+                            <Link to={`/fund/${encodeURIComponent(item.scheme_name || "No Scheme Name")}`}>
+                                {item.scheme_name || "No Scheme Name"}
                             </Link>
                         </td>
                         <td>{item.min_sip || "N/A"}</td>
                         <td>{item.expense_ratio || "N/A"}</td>
-                        <td>{item.fund_size_cr || "N/A"}</td>
-                        <td>{item.fund_manager || "N/A"}</td>
-                        <td>{item.category || "N/A"}</td>
-                        <td>{item.returns_1yr || "N/A"}</td>
-                        <td>{item.returns_3yr || "N/A"}</td>
-                        <td>{item.returns_5yr || "N/A"}</td>
+                        <td>{item.fund_size || "N/A"}</td>
+                        <td>{item.manager_name || "N/A"}</td>
+                        <td>{item.category_name || "N/A"}</td>
+                        <td>{item.return_1yr || "N/A"}</td>
+                        <td>{item.return_3yr || "N/A"}</td>
+                        <td>{item.return_5yr || "N/A"}</td>
                     </tr>
                 ))}
             </tbody>
