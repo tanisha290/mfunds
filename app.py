@@ -8,7 +8,7 @@ CORS(app)  # Enable CORS for all routes
 
 
 # Database connection
-DATABASE_URL = "mysql+pymysql://root:Tanisha29123@localhost/temp2"
+DATABASE_URL = "mysql+pymysql://root:240305@localhost/temp2"
 engine = create_engine(DATABASE_URL)
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -32,6 +32,64 @@ def get_fund_details():
         print(result)  # Debugging: Log the raw query result
         fund_details = [dict(row._mapping) for row in result]
     return jsonify(fund_details)
+
+@app.route('/api/nav-comparison', methods=['GET'])
+def get_nav_comparison():
+    scheme_names = request.args.getlist('scheme_names')  # Get multiple scheme names from query parameters
+    if not scheme_names:
+        return jsonify({"error": "At least one scheme_name is required"}), 400
+
+    # Dynamically generate placeholders for the IN clause
+    placeholders = ', '.join([f':name{i}' for i in range(len(scheme_names))])
+    params = {f'name{i}': scheme for i, scheme in enumerate(scheme_names)}
+
+    with engine.connect() as connection:
+        query = text(f"""
+            SELECT scheme_name, date_latest, nav 
+            FROM nav 
+            WHERE scheme_name IN ({placeholders}) 
+            ORDER BY date_latest
+        """)
+        result = connection.execute(query, params).fetchall()
+
+        # Process the result into the desired format
+        nav_data = {}
+        for row in result:
+            scheme = row.scheme_name
+            if scheme not in nav_data:
+                nav_data[scheme] = []
+            nav_data[scheme].append({"date": row.date_latest.strftime('%Y-%m-%d'), "value": row.nav})
+
+    return jsonify(nav_data)
+
+@app.route('/api/returns-comparison', methods=['GET'])
+def get_returns_comparison():
+    scheme_names = request.args.getlist('scheme_names')  # Get multiple fund IDs from query parameters
+    if not scheme_names:
+        return jsonify({"error": "At least one scheme is required"}), 400
+
+    # Dynamically generate placeholders for the IN clause
+    placeholders = ', '.join([f':id{i}' for i in range(len(scheme_names))])
+    params = {f'id{i}': scheme for i, scheme in enumerate(scheme_names)}
+
+    with engine.connect() as connection:
+        query = text(f"""
+            SELECT scheme_name, date, return_value 
+            FROM fund_performance2 
+            WHERE scheme_name IN ({placeholders}) 
+            ORDER BY date
+        """)
+        result = connection.execute(query, params).fetchall()
+
+        # Process the result into the desired format
+        returns_data = {}
+        for row in result:
+            scheme = row.scheme_name
+            if scheme not in returns_data:
+                returns_data[scheme] = []
+            returns_data[scheme].append({"date": row.date.strftime('%Y-%m-%d'), "value": float(row.return_value)})
+
+    return jsonify(returns_data)
 
 if __name__ == "__main__":
     app.run(debug=True)
