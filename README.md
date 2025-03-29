@@ -14,12 +14,12 @@ Follow these steps to import database in your system :
 1. Install mysql 
 2. Open mysql command line client
 3. Create new database using the command : 
-    CREATE DATABASE mutualfund;
+    CREATE DATABASE temp2;
 4. Close mysql
 5. Open Command prompt and run the following command : 
-    mysql -u root -p mutualfund < path/to/your/file.sql (Insert the path of .sql file here which you downloaded from the repo)
+    mysql -u root -p temp2 < path/to/your/file.sql (Insert the path of .sql file here which you downloaded from the repo)
 6. The database is imported you can verify the import by running these commands in mysql command line
     USE mutualfund;
     SHOW tables;
-    
+
 
