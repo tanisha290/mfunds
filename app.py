@@ -1,8 +1,10 @@
-from flask import Flask, jsonify, request
-from sqlalchemy import create_engine, text
+from   flask          import Flask, jsonify, request
+from   flask_cors     import CORS
+from   sqlalchemy     import create_engine, text
+from   sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import sessionmaker
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
+
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
