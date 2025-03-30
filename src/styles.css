@@ -22,6 +22,11 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    
+}
+
+thead{
+    background: linear-gradient(135deg, #11998e, #38ef7d);
 }
 
 th, td {

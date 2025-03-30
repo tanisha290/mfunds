@@ -11,14 +11,16 @@ function Home() {
     return (
         <div>
             <main>
-                <input
+            <input
                     type="text"
                     placeholder="Search Mutual Funds"
                     value={searchTerm}
                     onChange={handleSearchChange}
+                    width={100}
                 />
+                </main>
                 <Table searchTerm={searchTerm} />
-            </main>
+           
             <footer>
                 <p>&copy; DESIS Group 11</p>
             </footer>

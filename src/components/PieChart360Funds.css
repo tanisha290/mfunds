@@ -1,0 +1,35 @@
+.pie-chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px; /* Increased padding */
+
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  font-weight: 600;
+  max-width: 700px;
+  padding-left: 0;
+  padding-right: 0;
+  margin: 80px auto; /* More margin to create extra space */
+  min-height:600px; /* Increased height to ensure full chart visibility */
+  margin-top: 10px;
+}
+
+.chart-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0px; /* Extra margin to push the chart lower */
+  text-align: center;
+}
+
+.responsive-chart {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  border: 2px solid green;
+  height: 800px; /* Maximum height to ensure full visibility */
+}
+

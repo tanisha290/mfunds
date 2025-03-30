@@ -48,6 +48,11 @@ function Table({ searchTerm }) {
                     <th>Fund Size (Cr)</th>
                     <th>Fund Manager</th>
                     <th>Category</th>
+                    <th>Alpha</th>
+                    <th>Beta</th>
+                    <th>Sharpe Ratio</th>
+                    <th>Rating</th>
+                    <th>Risk</th>
                     <th>Returns 1yr</th>
                     <th>Returns 3yr</th>
                     <th>Returns 5yr</th>
@@ -58,7 +63,7 @@ function Table({ searchTerm }) {
                     <tr key={index}>
                         <td><input type="checkbox" /></td>
                         <td>
-                            <Link to={`/fund/${encodeURIComponent(item.scheme_name || "No Scheme Name")}`}>
+                            <Link to={`/fund/${encodeURIComponent(item.fund_id || "No Scheme Name")}`}>
                                 {item.scheme_name || "No Scheme Name"}
                             </Link>
                         </td>
@@ -67,6 +72,11 @@ function Table({ searchTerm }) {
                         <td>{item.fund_size || "N/A"}</td>
                         <td>{item.manager_name || "N/A"}</td>
                         <td>{item.category_name || "N/A"}</td>
+                        <td>{item.alpha || "N/A"}</td>
+                        <td>{item.beta || "N/A"}</td>
+                        <td>{item.sharpe || "N/A"}</td>
+                        <td>{item.rating || "N/A"}</td>
+                        <td>{item.sd || "N/A"}</td>
                         <td>{item.return_1yr || "N/A"}</td>
                         <td>{item.return_3yr || "N/A"}</td>
                         <td>{item.return_5yr || "N/A"}</td>

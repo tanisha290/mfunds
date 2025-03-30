@@ -3,14 +3,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #748D92; 
+    background: linear-gradient(135deg, #11998e, #38ef7d);
     padding: 15px 30px;
 }
 
 /* Logo styling */
 .logo {
-    font-size: 20px;
-    font-weight: Bold;
+    font-size: 35px;
+    font-weight: bolder;
     color: rgb(255, 255, 255);
     margin: 10px;
     font-family: "Poppins", serif;
@@ -31,9 +31,10 @@
     text-decoration: none;
     color: white;
     font-size: 18px;
+    font-weight: bold;
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: #ffcc00; /* Change color on hover */
+    color: green; /* Change color on hover */
 }

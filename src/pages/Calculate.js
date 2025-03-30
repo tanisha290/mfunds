@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react"; // Import useEffect
 import axios from "axios"; // Import axios
 import { Range, getTrackBackground } from "react-range";
 import "./Calculate.css";
+import { Link } from "react-router-dom";
 
 const STEP = 0.1;
 const MIN = 0;
@@ -15,12 +16,12 @@ function Calculate() {
     const [error, setError] = useState(null); // State to handle errors
 
     const [filters, setFilters] = useState({
-        min_sip: [0, 1000],
-        expense_ratio: [0, 1],
-        fund_size: [0, 1000],
-        return_1yr: [0, 10],
-        return_3yr: [0, 20],
-        return_5yr: [0, 20],
+        min_sip: [0, 2000],
+        expense_ratio: [0, 3],
+        fund_size: [0, 60000],
+        return_1yr: [-20, 131],
+        return_3yr: [3, 72],
+        return_5yr: [-5, 33],
         category_name: "",
     });
     useEffect(() => {
@@ -97,9 +98,9 @@ function Calculate() {
                         <label>Min SIP</label>
                         <Range
                             values={filters.min_sip}
-                            step={STEP}
-                            min={MIN}
-                            max={MAX}
+                            step={100}
+                            min={0}
+                            max={2000}
                             onChange={(values) => handleRangeChange("min_sip", values)}
                             renderTrack={({ props, children }) => (
                                 <div
@@ -111,8 +112,8 @@ function Calculate() {
                                         background: getTrackBackground({
                                             values: filters.min_sip,
                                             colors: ['#ccc', '#548BF4', '#ccc'],
-                                            min: MIN,
-                                            max: MAX
+                                            min: 0,
+                                            max: 2000
                                         }),
                                     }}
                                 >
@@ -140,7 +141,7 @@ function Calculate() {
                             values={filters.expense_ratio}
                             step={0.01}
                             min={0}
-                            max={1}
+                            max={3}
                             onChange={(values) => handleRangeChange("expense_ratio", values)}
                             renderTrack={({ props, children }) => (
                                 <div
@@ -153,7 +154,7 @@ function Calculate() {
                                             values: filters.expense_ratio,
                                             colors: ['#ccc', '#548BF4', '#ccc'],
                                             min: 0,
-                                            max: 1
+                                            max: 3
                                         }),
                                     }}
                                 >
@@ -179,9 +180,9 @@ function Calculate() {
                         <label>Fund Size (Cr)</label>
                         <Range
                             values={filters.fund_size}
-                            step={STEP}
-                            min={MIN}
-                            max={MAX}
+                            step={1000}
+                            min={0}
+                            max={60000}
                             onChange={(values) => handleRangeChange("fund_size", values)}
                             renderTrack={({ props, children }) => (
                                 <div
@@ -193,8 +194,8 @@ function Calculate() {
                                         background: getTrackBackground({
                                             values: filters.fund_size,
                                             colors: ['#ccc', '#548BF4', '#ccc'],
-                                            min: MIN,
-                                            max: MAX
+                                            min: 0,
+                                            max: 60000
                                         }),
                                     }}
                                 >
@@ -222,9 +223,9 @@ function Calculate() {
                         <label>Returns 1 Year</label>
                         <Range
                             values={filters.return_1yr}
-                            step={0.1}
-                            min={0}
-                            max={10}
+                            step={0.2}
+                            min={-20}
+                            max={131}
                             onChange={(values) => handleRangeChange("return_1yr", values)}
                             renderTrack={({ props, children }) => (
                                 <div
@@ -236,8 +237,8 @@ function Calculate() {
                                         background: getTrackBackground({
                                             values: filters.return_1yr,
                                             colors: ['#ccc', '#548BF4', '#ccc'],
-                                            min: 0,
-                                            max: 10
+                                            min: -20,
+                                            max: 131
                                         }),
                                     }}
                                 >
@@ -263,9 +264,9 @@ function Calculate() {
                         <label>Returns 3 Years</label>
                         <Range
                             values={filters.return_3yr}
-                            step={0.1}
-                            min={0}
-                            max={20}
+                            step={0.2}
+                            min={3}
+                            max={72}
                             onChange={(values) => handleRangeChange("return_3yr", values)}
                             renderTrack={({ props, children }) => (
                                 <div
@@ -277,8 +278,8 @@ function Calculate() {
                                         background: getTrackBackground({
                                             values: filters.return_3yr,
                                             colors: ['#ccc', '#548BF4', '#ccc'],
-                                            min: 0,
-                                            max: 20
+                                            min: 3,
+                                            max: 72
                                         }),
                                     }}
                                 >
@@ -304,9 +305,9 @@ function Calculate() {
                         <label>Returns 5 Years</label>
                         <Range
                             values={filters.return_5yr}
-                            step={0.1}
-                            min={0}
-                            max={20}
+                            step={0.2}
+                            min={-5}
+                            max={33}
                             onChange={(values) => handleRangeChange("return_5yr", values)}
                             renderTrack={({ props, children }) => (
                                 <div
@@ -318,8 +319,8 @@ function Calculate() {
                                         background: getTrackBackground({
                                             values: filters.return_5yr,
                                             colors: ['#ccc', '#548BF4', '#ccc'],
-                                            min: 0,
-                                            max: 20
+                                            min: -5,
+                                            max: 33
                                         }),
                                     }}
                                 >
@@ -348,6 +349,8 @@ function Calculate() {
                         <option value="">All</option>
                         <option value="Debt">Debt</option>
                         <option value="Hybrid">Hybrid</option>
+                        <option value="Equity">Equity</option>
+                        <option value="Solution Oriented">Solution Oriented</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>
@@ -369,11 +372,15 @@ function Calculate() {
                 <tbody>
                     {filteredData.map((item, index) => (
                         <tr key={index}>
-                            <td>{item.scheme_name}</td>
+                            <td>
+                            <Link to={`/fund/${encodeURIComponent(item.fund_id || "No Scheme Name")}`}>
+                                {item.scheme_name || "No Scheme Name"}
+                            </Link>
+                            </td>
                             <td>{item.min_sip}</td>
                             <td>{item.expense_ratio}</td>
                             <td>{item.fund_size}</td>
-                            <td>{item.fund_manager}</td>
+                            <td>{item.manager_name}</td>
                             <td>{item.category_name}</td>
                             <td>{item.return_1yr}</td>
                             <td>{item.return_3yr}</td>

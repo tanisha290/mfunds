@@ -7,6 +7,9 @@ import Calculate from "./pages/Calculate";
 import Login from "./pages/Login";
 import FundDetails from "./pages/FundDetails";
 import Header from "./components/Header";
+import Portfolio from "./pages/Portfolio";
+import Personalize from "./pages/Personalize";
+import NavGraph from "./components/NavGraph";
 import "./styles.css"; 
 
 function App() {
@@ -18,7 +21,10 @@ function App() {
                 <Route path="/compare" element={<Compare />} />
                 <Route path="/calculate" element={<Calculate />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/fund/:schemeName" element={<FundDetails />} />
+                <Route path="/fund/:fund_id" element={<FundDetails />} />
+                <Route path="/portfolio/:scheme_code" element={<Portfolio />} />
+                <Route path="/nav/:scheme_code" element={<NavGraph />} />
+                <Route path="/personalize" element={<Personalize/>} />
             </Routes>
         </Router>
     );

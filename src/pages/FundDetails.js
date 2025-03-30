@@ -1,40 +1,75 @@
 // filepath: src/pages/FundDetails.js
 import React from "react";
+import axios from "axios";
+import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
+import "./FundDetails.css";
+import Portfolio from "./Portfolio";
+
+// **Reusable Detail Card Component**
+const DetailCard = ({ label, value }) => (
+    <div className="detail-card">
+      <p className="detail-label">{label}</p>
+      <p className="detail-value">{value}</p>
+    </div>
+  );
+  
 
 function FundDetails() {
-    const { schemeName } = useParams();
+        const  fund_id  = (useParams()).fund_id; 
+        console.log(fund_id)
+        const [fund, setFund] = useState(null);
+        const [loading, setLoading] = useState(true); // State to handle loading
+        const [error, setError] = useState(null);
+      
+        useEffect(() => {
+          const fetchFundDetails = async () => {
+            try {
+              const response = await axios.get(`http://127.0.0.1:5000/api/single-fund-details?fund_id=${fund_id}`);
+              setFund(response.data);
+              console.log(response.data);
+              setLoading(false); 
+            } catch (err) {
+              setError("Failed to fetch fund details");
+              setLoading(false); 
+            }
+          };
+      
+          if (fund_id) {
+            fetchFundDetails();
+          }
+        }, [fund_id]); 
 
-    const data = [
-        {Scheme_name: "Aditya Birla SL Active Debt Multi-Mgr FoF-Dir Growth", min_sip : "100", expense_ratio: "0.27", fund_size_cr: "10", fund_manager:"Kaustubh Gupta", category: "Other", returns_1yr: "4", returns_3yr: "6.5", returns_5yr: "6.9" },
-        {Scheme_name: "Baroda BNP Paribas Corporate Bond Fund", min_sip : "300", expense_ratio: "0.32", fund_size_cr: "17", fund_manager:"Mayank Prakash", category: "Debt", returns_1yr: "2.8", returns_3yr: "5.6", returns_5yr: "4.4" },
-        {Scheme_name: "Canara Robeco Income Fund",min_sip: "1000",expense_ratio: "0.75",fund_size_cr: "125",fund_manager: "Avnish Jain",category: "Debt",returns_1yr: "3.9",returns_3yr: "5.8",returns_5yr: "7"},
-        {Scheme_name: "DSP Equity Savings Fund",min_sip: "500",expense_ratio: "0.4",fund_size_cr: "535",fund_manager: "Kedar Karnik",category: "Hybrid",returns_1yr: "4",returns_3yr: "14.6",returns_5yr: "7.8"},
-        {Scheme_name: "Edelweiss Balanced Advantage Fund",min_sip: "500",expense_ratio: "0.67",fund_size_cr: "108",fund_manager: "Bhavesh Jain",category: "Hybrid",returns_1yr: "7.5",returns_3yr: "9.6",returns_5yr: "5.7"},
-        {Scheme_name: "Franklin India Equity Savings Fund",min_sip: "500",expense_ratio: "0.9",fund_size_cr: "123",fund_manager: "Varun Sharma",category: "Hybrid",returns_1yr: "8.8",returns_3yr: "13.6",returns_5yr: "9.7"},
-        {Scheme_name: "HDFC Equity Savings Fund",min_sip: "500",expense_ratio: "0.6",fund_size_cr: "123",fund_manager: "Chirag Setalvad",category: "Debt",returns_1yr: "3.6",returns_3yr: "12.6",returns_5yr: "3.7"},
-        // Add more data as needed
-    ];
-
-    const fund = data.find(item => item.Scheme_name === schemeName);
-
-    if (!fund) {
-        return <h1>Fund not found</h1>;
-    }
-
-    return (
-        <div>
-            <h1>{fund.Scheme_name}</h1>
-            <p>Min SIP: {fund.min_sip}</p>
-            <p>Expense Ratio: {fund.expense_ratio}</p>
-            <p>Fund Size (Cr): {fund.fund_size_cr}</p>
-            <p>Fund Manager: {fund.fund_manager}</p>
-            <p>Category: {fund.category}</p>
-            <p>Returns 1yr: {fund.returns_1yr}</p>
-            <p>Returns 3yr: {fund.returns_3yr}</p>
-            <p>Returns 5yr: {fund.returns_5yr}</p>
-        </div>
-    );
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>{error}</p>;
+        return (
+            <div>
+                <div className="fund-header">
+                <h1 className="fund-title">{fund.scheme_name}</h1>
+                <p className="fund-category">{fund.category_name}</p>
+              </div>
+            <Portfolio scheme_code={125342} schemename={fund.scheme_name}/>
+            <div className="fund-details-container">
+              <div className="fund-details-grid">
+                <DetailCard label="Min SIP" value={`₹${fund.min_sip}`} />
+                <DetailCard label="Expense Ratio" value={`${fund.expense_ratio}%`} />
+                <DetailCard label="Fund Size (Cr)" value={`₹${fund.fund_size} Cr`} />
+                <DetailCard label="Fund Manager" value={fund.manager_name} />
+                <DetailCard label="Alpha" value={fund.alpha} />
+                <DetailCard label="Beta" value={fund.beta} />
+                <DetailCard label="Rating" value={fund.rating} />
+                <DetailCard label="Risk" value={fund.sd} />
+                <DetailCard label="Sharpe Ratio" value={fund.sharpe} />
+                <DetailCard label="Returns (1yr)" value={`${fund.return_1yr}%`} />
+                <DetailCard label="Returns (3yr)" value={`${fund.return_3yr}%`} />
+                <DetailCard label="Returns (5yr)" value={`${fund.return_5yr}%`} />
+              </div>
+            </div>
+            </div>
+          );
 }
+
+
+
 
 export default FundDetails;
