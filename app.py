@@ -17,7 +17,7 @@ CORS(app)  # Enable CORS for all routes
 
 
 # Database connection configuration
-DATABASE_URL = "mysql+pymysql://root:Tow&516*@localhost/your_database_name"
+DATABASE_URL = "mysql+pymysql://root:240305@localhost:3306/temp2"
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 engine = create_engine(DATABASE_URL)
 Session = sessionmaker(bind=engine)
