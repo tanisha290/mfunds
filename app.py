@@ -10,7 +10,7 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Database connection
-DATABASE_URL = "mysql+pymysql://root:mysql@127.0.0.1:3306/temp2"
+DATABASE_URL = "mysql+pymysql://root:240305@localhost:3306/temp2"
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 engine = create_engine(DATABASE_URL)
 Session = sessionmaker(bind=engine)
@@ -202,8 +202,40 @@ def get_nav_details():
                 return jsonify({"error": "No entries found for this scheme_code"}), 404
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+# API to Fetch Data from user Table
+class User(db.Model):
+    __tablename__ = "Users"
 
+    email = db.Column(db.String(255), primary_key=True)  # Primary key
+    name = db.Column(db.String(255), nullable=False)     # Name column
+    password = db.Column(db.String(255), nullable=False) # Password column
 
+@app.route('/api/login', methods=['POST'])
+def login():
+    data = request.json  # Get JSON data from the request
+    name = data.get('name')
+    email = data.get('email')
+    password = data.get('password')  # Get the password from the request
+
+    if not name or not email or not password:
+        return jsonify({"error": "Name, email, and password are required"}), 400
+
+    try:
+        # Check if the user already exists
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            # Optionally, you can verify the password here if needed
+            return jsonify({"message": f"Welcome back, {existing_user.name}!"})
+
+        # Create a new user
+        new_user = User(name=name, email=email, password=password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        return jsonify({"message": f"Welcome, {name}!"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
