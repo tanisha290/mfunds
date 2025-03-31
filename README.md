@@ -96,6 +96,42 @@ InvestBuddy helps users research and compare mutual funds based on various param
 ## Project Structure
 
 ```
+📂 InvestBuddy  
+├── 📁 backend/                # Backend logic (Django/FastAPI/Flask)  
+│   ├── 📁 api/                # API endpoints  
+│   ├── 📁 models/             # Database models  
+│   ├── 📁 services/           # Business logic  
+│   ├── 📄 requirements.txt    # Backend dependencies  
+│   ├── 📄 config.py           # Configuration settings  
+│   ├── 📄 main.py             # Entry point  
+│   └── 📄 README.md           # Backend-specific details  
+│  
+├── 📁 frontend/               # Frontend application (React/Vue)  
+│   ├── 📁 src/                # Source code  
+│   ├── 📁 components/         # Reusable UI components  
+│   ├── 📁 pages/              # Different pages/screens  
+│   ├── 📄 package.json        # Frontend dependencies  
+│   ├── 📄 index.js            # Main entry file  
+│   ├── 📄 App.js              # Core application logic  
+│   └── 📄 README.md           # Frontend-specific details  
+│  
+├── 📁 data/                   # Datasets, financial APIs, or scripts  
+│   ├── 📄 data_sources.md     # Documentation on data sources  
+│   ├── 📄 fetch_data.py       # Script to fetch/update data  
+│  
+├── 📁 docs/                   # Project documentation  
+│   ├── 📄 API.md              # API documentation  
+│   ├── 📄 ARCHITECTURE.md     # System architecture details  
+│  
+├── 📁 tests/                  # Unit and integration tests  
+│   ├── 📄 test_backend.py     # Backend tests  
+│   ├── 📄 test_frontend.js    # Frontend tests  
+│  
+├── 📄 .gitignore              # Files to be ignored by Git  
+├── 📄 README.md               # Main project overview  
+└── 📄 LICENSE                 # License information  
+
+```
 investbuddy/
 ├── backend/
 │   ├── app.py
