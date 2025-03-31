@@ -214,23 +214,48 @@ The database consists of multiple tables that store information about mutual fun
 3. Open `http://localhost:3000` in your browser.
 
 ---
-## To run the unit tests:
+
+## Python Directory Structure
+```
+app.py
+db
+├── __init__.py
+└── database.py
+config
+├── __init__.py
+└── constants.py
+services
+├── __init__.py
+└── api
+    ├── __init__.py
+    ├── auth.py
+    ├── funds.py
+    ├── home.py
+    └── nav.py
+models
+├── __init__.py
+└── models.py
+tests
+└── test_app.py
+```
+
+---
+## Running Unit Tests:
 1. Run the following command to run unit tests of app.py -
    ```sh
         python -m unittest tests/test_app.py
     ```
 2. Run the following command to check pylint score - 
     ```sh
-        python -m pylint app.py
+        python -m pylint config/* db/* models/* services/* app.py
     ```          
-3. Pylint score is 9.75/10
+3. Pylint score is 9.74/10
 4. Run the following command to check pyflakes score - 
     ```sh
-        python -m pyflakes app.py
+        python -m pyflakes config/* db/* models/* services/* app.py
     ```
 
 ---
-
 ### **Future Scope**
 
 - **AI-Powered Chatbot:**  

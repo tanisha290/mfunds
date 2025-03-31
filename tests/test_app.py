@@ -2,7 +2,9 @@ import unittest
 from unittest.mock import patch, MagicMock
 import json
 from datetime import datetime
-from app import app, Fund, BlueChip, User
+from app import app
+from models.models import Fund, BlueChip, User
+from db.database import db, engine
 
 class TestApp(unittest.TestCase):
    """Test cases for the Mutual Funds Comparison Tool API"""
@@ -34,7 +36,7 @@ class TestApp(unittest.TestCase):
                         'Welcome to the Mutual Funds Comparison Tool API!')
 
 
-   @patch('app.engine.connect')
+   @patch('db.database.engine.connect')
    def test_nav_history(self, mock_connect):
        """Test retrieving NAV history"""
        # Mock the database connection
@@ -62,7 +64,7 @@ class TestApp(unittest.TestCase):
        self.assertEqual(data[1]['scheme_name'], 'Fund 2')
 
 
-   @patch('app.engine.connect')
+   @patch('db.database.engine.connect')
    def test_fund_details(self, mock_connect):
        """Test retrieving all fund details"""
        # Mock the database connection
@@ -89,7 +91,7 @@ class TestApp(unittest.TestCase):
        self.assertEqual(data[0]['fund_name'], 'Test Fund')
 
 
-   @patch('app.engine.connect')
+   @patch('db.database.engine.connect')
    def test_single_fund_details_success(self, mock_connect):
        """Test retrieving details for a specific fund"""
        # Mock the database connection
@@ -123,7 +125,7 @@ class TestApp(unittest.TestCase):
        self.assertEqual(data['error'], 'fund_id is required')
 
 
-   @patch('app.engine.connect')
+   @patch('db.database.engine.connect')
    def test_single_fund_details_not_found(self, mock_connect):
        """Test retrieving a non-existent fund"""
        # Mock the database connection
@@ -150,7 +152,7 @@ class TestApp(unittest.TestCase):
        self.assertEqual(data['error'], 'At least one scheme_name is required')
 
 
-   @patch('app.engine.connect')
+   @patch('db.database.engine.connect')
    def test_nav_comparison_success(self, mock_connect):
        """Test NAV comparison with valid scheme names"""
        # Mock the database connection
@@ -189,7 +191,7 @@ class TestApp(unittest.TestCase):
        self.assertEqual(data['error'], 'At least one scheme is required')
 
 
-   @patch('app.Fund.query')
+   @patch('models.models.Fund.query')
    def test_360funds(self, mock_query):
        """Test retrieving data from 360funds table"""
        # Mock Fund.query.all()
@@ -208,7 +210,7 @@ class TestApp(unittest.TestCase):
        self.assertEqual(data[1]['Name'], 'Fund B')
 
 
-   @patch('app.BlueChip.query')
+   @patch('models.models.BlueChip.query')
    def test_bluechipholdings(self, mock_query):
        """Test retrieving data from bluechipholdings table"""
        # Mock BlueChip.query.all()
@@ -235,7 +237,7 @@ class TestApp(unittest.TestCase):
        self.assertEqual(data['error'], 'scheme_code is required')
 
 
-   @patch('app.db.engine.connect')
+   @patch('db.database.db.engine.connect')
    def test_nav_details_success(self, mock_connect):
        """Test NAV details with valid scheme code"""
        # Mock the database connection
@@ -264,9 +266,9 @@ class TestApp(unittest.TestCase):
        self.assertEqual(data[0]['scheme_name'], 'Test Scheme')
 
 
-   @patch('app.db.engine.connect')
+   @patch('db.database.db.engine.connect')
    def test_nav_details_not_found(self, mock_connect):
-       """Test NAV details for a non-existent scheme code"""
+       """Test NAV details with invalid scheme code"""
        # Mock the database connection
        mock_conn = MagicMock()
        mock_connect.return_value.__enter__.return_value = mock_conn
@@ -299,10 +301,10 @@ class TestApp(unittest.TestCase):
        self.assertEqual(data['error'], 'Name, email, and password are required')
 
 
-   @patch('app.User.query')
-   @patch('app.db.session')
+   @patch('models.models.User.query')
+   @patch('db.database.db.session')
    def test_login_existing_user(self, mock_session, mock_query):
-       """Test login with an existing user"""
+       """Test login with existing user"""
        # Mock User.query.filter_by().first()
        user = User(email='test@example.com', name='Test User', password='password123')
        mock_query.filter_by.return_value.first.return_value = user
@@ -323,10 +325,10 @@ class TestApp(unittest.TestCase):
        mock_session.commit.assert_not_called()
 
 
-   @patch('app.User.query')
-   @patch('app.db.session')
+   @patch('models.models.User.query')
+   @patch('db.database.db.session')
    def test_login_new_user(self, mock_session, mock_query):
-       """Test login with a new user (registration)"""
+       """Test login with new user"""
        # Mock User.query.filter_by().first() to return None (no existing user)
        mock_query.filter_by.return_value.first.return_value = None
       
