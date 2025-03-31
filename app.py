@@ -5,17 +5,15 @@ This module provides a RESTful API for comparing mutual funds, retrieving NAV hi
 fund details, and handling user authentication.
 """
 
-from flask import Flask
-from flask_cors import CORS
-
-from db.database import init_app
-from services.api.home import home
-from services.api.nav import get_nav_history, get_nav_comparison, get_nav_details
-from services.api.funds import (
-    get_fund_details, single_fund_details, get_returns_comparison,
-    get_360funds, get_bluechipholdings
-)
-from services.api.auth import login
+from    db.database        import init_app
+from    flask              import Flask
+from    flask_cors         import CORS
+from    services.api.auth  import login
+from    services.api.funds import (get_fund_details, single_fund_details, \
+                                   get_returns_comparison, get_360funds, \
+                                   get_bluechipholdings)
+from    services.api.home  import home
+from    services.api.nav   import get_nav_history, get_nav_comparison, get_nav_details
 
 
 app = Flask(__name__)
