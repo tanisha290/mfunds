@@ -132,29 +132,6 @@ InvestBuddy helps users research and compare mutual funds based on various param
 └── 📄 LICENSE                 # License information  
 
 ```
-investbuddy/
-├── backend/
-│   ├── app.py
-│   ├── models.py
-│   ├── routes/
-│   │   ├── auth.py
-│   │   ├── funds.py
-│   ├── utils/
-│   │   ├── db.py
-│   │   ├── helpers.py
-│   ├── requirements.txt
-│   ├── .env
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   ├── package.json
-│   ├── .env
-├── database.sql
-├── README.md
-└── .gitignore
-```
-
 ---
 
 ## API Endpoints
