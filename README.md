@@ -22,4 +22,11 @@ Follow these steps to import database in your system :
     USE mutualfund;
     SHOW tables;
 
+To run the unit tests:
+
+1. Run the following command to run unit tests of app.py - python -m unittest tests/test_app.py
+2. Run the following command to check pylint score - python -m pylint app.py          
+3. Pylint score is 9.75/10
+4. Run the following command to check pyflakes score - python -m pyflakes app.py
+
 
