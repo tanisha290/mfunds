@@ -5,11 +5,12 @@ This module provides a RESTful API for comparing mutual funds, retrieving NAV hi
 fund details, and handling user authentication.
 """
 
-from flask import Flask, jsonify, request
-from flask_cors import CORS
-from sqlalchemy import create_engine, text
-from sqlalchemy.orm import sessionmaker
-from flask_sqlalchemy import SQLAlchemy
+
+from   flask            import Flask, jsonify, request
+from   flask_cors       import CORS
+from   flask_sqlalchemy import SQLAlchemy
+from   sqlalchemy       import create_engine, text
+from   sqlalchemy.orm   import sessionmaker
 
 
 app = Flask(__name__)
