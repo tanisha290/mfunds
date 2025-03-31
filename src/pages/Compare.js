@@ -160,17 +160,6 @@ function Compare() {
       </button>
       {showCharts && filteredFunds.length > 1 && (
         <div className="charts">
-          <h2>Returns 1 Year</h2>
-          <ResponsiveContainer width="100%" height={400}>
-            <BarChart data={filteredFunds}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="scheme_name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="return_1yr" fill="#8884d8" />
-            </BarChart>
-          </ResponsiveContainer>
           <h2>Comparison Graphs</h2>
           <ComparisonGraph selectedFunds={filteredFunds} />
         </div>
