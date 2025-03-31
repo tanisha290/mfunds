@@ -230,6 +230,20 @@ The database consists of multiple tables that store information about mutual fun
     ```
 
 ---
+
+### **Future Scope**
+
+- **AI-Powered Chatbot:**  
+  A smart assistant integrated with the login system to provide personalized mutual fund recommendations based on user preferences and investment goals.  
+
+- **Real-Time Notifications & Alerts:**  
+  Instant updates on market trends, fund performance, and personalized investment alerts.  
+
+- **Unified Portfolio Tracking:**  
+  A comprehensive dashboard linked to user accounts, enabling seamless monitoring of investments across multiple companies.  
+
+  
+---
 ## Contributing
 
 Contributions are welcome! To contribute:
