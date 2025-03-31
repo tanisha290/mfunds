@@ -2,11 +2,10 @@
 API endpoints for fund-related operations.
 """
 
-from flask import jsonify, request
-from sqlalchemy import text
-
-from db.database import engine
-from models.models import Fund, BlueChip
+from   db.database   import engine
+from   flask         import jsonify, request
+from   models.models import Fund, BlueChip
+from   sqlalchemy    import text
 
 
 def get_fund_details():
