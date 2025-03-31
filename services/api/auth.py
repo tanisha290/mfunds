@@ -1,9 +1,8 @@
 """
 API endpoints for authentication operations.
 """
-
-from    db.database   import db
 from    flask         import jsonify, request
+from    db.database   import db
 from    models.models import User
 
 

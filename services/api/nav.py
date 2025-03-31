@@ -2,9 +2,10 @@
 API endpoints for NAV-related operations.
 """
 
-from   db.database import engine, db
+
 from   flask       import jsonify, request
 from   sqlalchemy  import text
+from   db.database import engine, db
 
 
 def get_nav_history():
