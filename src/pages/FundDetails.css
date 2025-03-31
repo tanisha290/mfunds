@@ -1,15 +1,15 @@
-/* 🔹 Page Container */
+/*Styling for fund details page */
+
 .fund-details-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: white; /* White background */
+    background: white; 
     font-family: "Poppins", sans-serif;
     padding: 30px;
   }
   
-  /* 🔹 Fund Header */
   .fund-header {
     text-align: center;
     margin-bottom: 30px;
@@ -31,25 +31,16 @@
     display: inline-block;
   }
   
-  /* 🔹 Fund Details Grid */
   .fund-details-grid {
-   /* display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    color: white;
-    max-width: 800px;
-    width: 100%;*/
-
-    display: flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap:5px;
     
   }
   
-  /* 🔹 Detail Cards */
   .detail-card {
-    background: linear-gradient(135deg, #11998e, #38ef7d); /* Green-Blue Gradient */
+    background: linear-gradient(135deg, #11998e, #38ef7d); 
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
@@ -59,20 +50,20 @@
     font-size: 18px;
     font-weight: 500;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    flex: 1 1 calc(22% - 15px); /* Makes cards smaller */
-    max-width: calc(22% - 15px); /* Ensures consistency */
-    padding: 15px; /* Reduce padding */
-    font-size: 14px; /* Smaller text for better fit */
+    flex: 1 1 calc(22% - 15px); 
+    max-width: calc(22% - 15px); 
+    padding: 15px; 
+    font-size: 14px; 
   }
   
-  /* Card Hover Effects */
+ 
   .detail-card:hover {
     transform: translateY(-5px) scale(1.05);
     color: white;
     box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.2);
   }
   
-  /* 🔹 Label & Value */
+
   .detail-label {
     font-size: 16px;
     color: white;
@@ -86,7 +77,7 @@
     margin-top: 5px;
   }
   
-  /* 🔹 Responsive Adjustments */
+  /* Responsive Styling */
   @media (max-width: 600px) {
     .fund-details-grid {
       grid-template-columns: 1fr;

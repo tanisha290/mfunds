@@ -14,6 +14,21 @@ import {
 import ComparisonGraph from "../components/ComparisonGraph"; // Import the ComparisonGraph component
 import "./Compare.css";
 
+/**
+ * Compare Component
+ *
+ * This component allows users to select and compare multiple mutual funds.
+ * Users can add up to 5 funds using a modal selector and visualize their performance
+ * through comparison charts.
+ *
+ * Features:
+ * - Select funds through a modal and store them in state.
+ * - Dynamically add up to 5 funds for comparison.
+ * - Display comparison charts when at least two funds are selected.
+ *
+ * @returns {JSX.Element} The Compare component UI with fund selection and comparison graphs.
+ */
+
 function Compare() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFunds, setSelectedFunds] = useState([null, null]);

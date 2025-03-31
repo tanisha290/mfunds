@@ -21,36 +21,48 @@ ChartJS.register(
   Legend
 );
 
+/**
+ * ComparisonGraph Component
+ * 
+ * Renders a line chart comparing returns of selected mutual funds.
+ * Fetches return data from the backend API and visualizes it.
+ * 
+ * @param {Object} props - Component props
+ * @param {Array} props.selectedFunds - List of selected funds for comparison
+ */
 const ComparisonGraph = ({ selectedFunds }) => {
-  const [navData, setNavData] = useState({});
-  const [returnsData, setReturnsData] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [returnsData, setReturnsData] = useState({}); //State for data of returns of funds 
+  const [loading, setLoading] = useState(true); //State for checking whether data is still being retrieved from database
 
   useEffect(() => {
     setLoading(true);
     console.log("Selected Funds:", selectedFunds);
 
     const fetchReturnsData = async () => {
-      const schemeNames = selectedFunds
-        .map((fund) => fund.scheme_name)
-        .join("&scheme_names=");
-      const returnsResponse = await fetch(
-        `http://localhost:5000/api/returns-comparison?scheme_names=${schemeNames}`
-      );
-      const returnsResult = await returnsResponse.json();
-      console.log("Returns Data:", returnsResult);
-      setReturnsData(returnsResult);
+      try {
+        const schemeNames = selectedFunds
+          .map((fund) => encodeURIComponent(fund.scheme_name))
+          .join("&scheme_names=");
+        const returnsResponse = await fetch(
+          `http://localhost:5000/api/returns-comparison?scheme_names=${schemeNames}`
+        );
+        const returnsResult = await returnsResponse.json();
+        console.log("Returns Data:", returnsResult);
+        setReturnsData(returnsResult);
+      } catch (error) {
+        console.error("Error fetching returns data:", error);
+      } finally {
+        setLoading(false);
+      }
     };
-    Promise.all([fetchReturnsData()]).finally(() =>
-      setLoading(false)
-    );
+
+    fetchReturnsData();
   }, [selectedFunds]);
 
   if (loading) return <p>Loading...</p>;
 
   return (
     <div>
-
       <h3>Returns Comparison</h3>
       <Line
         data={{

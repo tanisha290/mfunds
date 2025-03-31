@@ -1,5 +1,20 @@
 import React, { useState } from "react";
 
+/**
+ * Login Component
+ *
+ * This component provides a login form where users can enter their username, email, and password.
+ * It sends login credentials to the backend API and displays a welcome message upon successful login.
+ *
+ * Features:
+ * - Collects user input for username, email, and password.
+ * - Sends a POST request to `http://localhost:5000/api/login` for authentication.
+ * - Displays a welcome message if login is successful, or an error message otherwise.
+ *
+ * @returns {JSX.Element} The Login component UI.
+ */
+
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

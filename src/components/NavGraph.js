@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 import "./NavGraph.css"; // Import CSS for styling
 
-const FundGraph = (parameters) => {
-  const scheme_code  = parameters.scheme_code,  schemename=parameters.schemename;// Get scheme_code from URL
-  console.log(scheme_code)
-  const [fundData, setFundData] = useState([]);
-  const [schemeName, setSchemeName] = useState("");
+/**
+ * FundGraph Component
+ * 
+ * Displays a NAV (Net Asset Value) trend line chart for a given fund scheme.
+ * Fetches NAV data from the backend and visualizes it using Recharts.
+ * 
+ * @param {Object} parameters - Component props
+ * @param {string} parameters.scheme_code - Unique identifier for the fund scheme
+ * @param {string} parameters.schemename - Display name of the scheme
+ */
+const FundGraph = ({ scheme_code, schemename }) => {
+  const [fundData, setFundData] = useState([]); //State for funddata retrieved from backend
+  const [schemeName, setSchemeName] = useState(""); //set for scheme name to be displayed
 
   useEffect(() => {
     if (!scheme_code) return;
@@ -23,13 +30,13 @@ const FundGraph = (parameters) => {
             date: entry.date_latest,
             nav: parseFloat(entry.nav),
           }));
-         // setSchemeName(response.data[0]?.scheme_name || "Fund");
-         setSchemeName(schemename)
-          setFundData(formattedData.reverse()); // Reverse to show oldest first
+
+          setSchemeName(schemename);
+          setFundData(formattedData.reverse()); 
         }
       })
       .catch((error) => console.error("Error fetching fund details:", error));
-  }, [scheme_code]);
+  }, [scheme_code, schemename]);
 
   return (
     <div className="fund-graph-container">

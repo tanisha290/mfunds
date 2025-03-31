@@ -9,6 +9,28 @@ const STEP = 0.1;
 const MIN = 0;
 const MAX = 1000;
 
+/**
+ * Calculate Component
+ *
+ * This component allows users to filter and view mutual fund details based on various criteria.
+ * Users can adjust filters using range sliders and dropdowns to refine their search.
+ *
+ * Features:
+ * - Fetches mutual fund data from an API endpoint.
+ * - Displays a table of mutual funds with key details.
+ * - Allows filtering based on:
+ *   - Minimum SIP
+ *   - Expense Ratio
+ *   - Fund Size
+ *   - Returns (1-year, 3-year, 5-year)
+ *   - Fund Category
+ * - Uses the `react-range` library for interactive range sliders.
+ * - Provides a dynamic search and filter experience.
+ *
+ * @returns {JSX.Element} The Calculate component UI with filters and a results table.
+ */
+
+
 function Calculate() {
 
     const [data, setData] = useState([]); // State to store fetched data
@@ -39,24 +61,7 @@ function Calculate() {
         };
 
         fetchData();
-    }, []); // Empty dependency array ensures this runs only once
-
-         // Filter data based on the search term
-    // const filteredData = searchTerm
-    // ? data.filter((item) =>
-    //       item.scheme_name && item.scheme_name.toLowerCase().includes(searchTerm.toLowerCase())
-    //   )
-    // : data; // If searchTerm is empty, show all data
-    // // console.log("Fetched Data:", data);
-    // // console.log("Filtered Data:", filteredData); // Debugging
-    // // console.log("Search Term:", searchTerm);
-    // if (filteredData.length === 0) return <p>No matching records found</p>;
-    // const handleRangeChange = (attribute, values) => {
-    //     setFilters((prevFilters) => ({
-    //         ...prevFilters,
-    //         [attribute]: values,
-    //     }));
-    // };
+    }, []); 
     const handleRangeChange = (attribute, values) => {
         setFilters((prevFilters) => ({
             ...prevFilters,
@@ -350,7 +355,7 @@ function Calculate() {
                         <option value="Debt">Debt</option>
                         <option value="Hybrid">Hybrid</option>
                         <option value="Equity">Equity</option>
-                        <option value="Solution Oriented">Solution Oriented</option>
+                        <option value="">Solution Oriented</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>

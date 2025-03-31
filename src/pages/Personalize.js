@@ -1,5 +1,17 @@
 import React, { useState } from "react";
 
+/**
+ * Investment Personalization Quiz Component
+ * 
+ * This component guides users through a quiz to assess their investment preferences.
+ * Based on their answers, it recommends suitable mutual funds.
+ * 
+ * Features:
+ * - Dynamic question-based state management
+ * - Filtering mutual funds based on user responses
+ * - Provides recommendations based on multiple criteria
+ */
+
 // Questions for the quiz
 const questions = [
     {

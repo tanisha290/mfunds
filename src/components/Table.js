@@ -2,37 +2,44 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+/**
+ * Table Component
+ * 
+ * Fetches and displays fund details in a tabular format.
+ * Includes search functionality to filter results based on the scheme name.
+ * 
+ * @param {Object} props - Component props
+ * @param {string} props.searchTerm - Search term for filtering fund details
+ */
 function Table({ searchTerm }) {
     const [data, setData] = useState([]); // State to store fetched data
-    const [loading, setLoading] = useState(true); // State to handle loading
+    const [loading, setLoading] = useState(true); // State to handle loading status
     const [error, setError] = useState(null); // State to handle errors
 
-    // Fetch data from the backend
+    //Loads all data from backend
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get("http://127.0.0.1:5000/api/fund-details");
-                console.log("Fetched Data:", response.data); // Debugging
-                setData(response.data); // Set the fetched data
-                setLoading(false); // Set loading to false
+                setData(response.data);
             } catch (err) {
-                console.error("Error fetching data:", err); // Debugging
+                console.error("Error fetching data:", err);
                 setError("Failed to fetch data");
-                setLoading(false); // Set loading to false
+            } finally {
+                setLoading(false);
             }
         };
-
         fetchData();
-    }, []); // Empty dependency array ensures this runs only once
+    }, []); 
 
     // Filter data based on the search term
     const filteredData = searchTerm
         ? data.filter((item) =>
-              item.scheme_name && item.scheme_name.toLowerCase().includes(searchTerm.toLowerCase())
+              item.scheme_name?.toLowerCase().includes(searchTerm.toLowerCase())
           )
-        : data; // If searchTerm is empty, show all data
+        : data;
 
-    // Show loading or error messages
+    // Display loading or error messages
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
     if (data.length === 0) return <p>No data available</p>;

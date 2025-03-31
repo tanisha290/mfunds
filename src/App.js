@@ -12,6 +12,30 @@ import Personalize from "./pages/Personalize";
 import NavGraph from "./components/NavGraph";
 import "./styles.css"; 
 
+
+/**
+ * App Component
+ *
+ * This component serves as the entry point of the React application.
+ * It sets up routing using `react-router-dom` and defines different routes
+ * for navigating between pages of the application.
+ *
+ * Routes:
+ * - `/` (Home): Displays the homepage.
+ * - `/compare` (Compare): Allows users to compare mutual funds.
+ * - `/calculate` (Calculate): Provides investment calculation tools.
+ * - `/login` (Login): Handles user authentication.
+ * - `/fund/:fund_id` (FundDetails): Shows details of a specific mutual fund.
+ * - `/portfolio/:scheme_code` (Portfolio): Displays user portfolio details.
+ * - `/nav/:scheme_code` (NavGraph): Visualizes the NAV history of a mutual fund.
+ * - `/personalize` (Personalize): Offers personalized investment recommendations.
+ *
+ * Components:
+ * - `Header`: Displays the navigation bar.
+ *
+ * @returns {JSX.Element} The main application component with routing.
+ */
+
 function App() {
     return (
         <Router>
